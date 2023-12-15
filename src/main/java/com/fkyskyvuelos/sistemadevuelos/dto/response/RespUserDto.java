@@ -1,5 +1,6 @@
 package com.fkyskyvuelos.sistemadevuelos.dto.response;
 
+import com.fkyskyvuelos.sistemadevuelos.dto.usuarioDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RespuestaDto {
+public class RespUserDto {
+    private usuarioDto usuarioDto;
     private String message;
 }

@@ -1,39 +1,48 @@
 package com.fkyskyvuelos.sistemadevuelos.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fkyskyvuelos.sistemadevuelos.dto.VueloDto;
-import com.fkyskyvuelos.sistemadevuelos.dto.response.RespuestaDto;
-import com.fkyskyvuelos.sistemadevuelos.entity.Vuelo;
+import com.fkyskyvuelos.sistemadevuelos.entity.asiento;
+import com.fkyskyvuelos.sistemadevuelos.entity.vuelo;
 import com.fkyskyvuelos.sistemadevuelos.repository.IVuelosRepository;
-import com.fkyskyvuelos.sistemadevuelos.repository.VuelosRepositoryImp;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class VuelosServiceImp implements IVuelosService {
-    private IVuelosRepository repository;
+    @Autowired
+    private IVuelosRepository vuelosRepository;
 
-    public VuelosServiceImp(VuelosRepositoryImp repository){
-        this.repository = repository;
-    }
 
-    @Override
-    public RespuestaDto guardarReserva(VueloDto vuelo) {
-        ObjectMapper mapper = new ObjectMapper();
-        Vuelo vueloEntity = mapper.convertValue(vuelo,Vuelo.class);
-        Vuelo respuestaRepo = repository.save(vueloEntity);
-        if (respuestaRepo == null){
-            return new RespuestaDto("no se guardo nada");
-        }
 
-        return new RespuestaDto("se guardo este nombre de vuelo: "  );
-    }
 
     @Override
     public List<VueloDto> buscarTodos() {
-        ObjectMapper mapper = new ObjectMapper();
-        return repository.findAll().stream()
-                .map(vuelo -> mapper.convertValue(vuelo, VueloDto.class))
-                .toList();
+        ModelMapper mapper = new ModelMapper();
+        List<vuelo> vueloEnti = vuelosRepository.findAll();
+        List<VueloDto> vuelosDto = new ArrayList<>();
+//        carritosEnt.stream().forEach(c-> carritosDto.add(mapper.map(c,CartDto.class)));
+
+        vueloEnti.forEach(v -> {
+                    Set<asiento> asientos = v.getAsientos();
+                    int asientosDispo=0;
+                    for (asiento a : asientos) {
+                        if (a.isDisponible() && !a.isReservado()) {
+                            asientosDispo++;
+                        }
+                    }
+                    VueloDto vueloDtot = mapper.map(v, VueloDto.class);
+                    vueloDtot.setAsientosDispo(asientosDispo);
+                    vuelosDto.add(vueloDtot);
+                }
+        );
+
+
+        return vuelosDto;
     }
+
 }

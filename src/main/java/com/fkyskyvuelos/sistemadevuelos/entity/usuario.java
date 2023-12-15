@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "usuario")
-public class Usuario {
+public class usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,11 @@ public class Usuario {
 
     // relaciones de entidades
 
-    @OneToMany
-    private Set<Ticket> tickets;
-
-
     @ManyToMany(mappedBy = "vuelosUsuarios")
-    private Set<Vuelo> vuelos;
+    private Set<vuelo> vuelos;
+
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinColumn(name = "idasiento", referencedColumnName = "idAsiento")
+    private asiento asiento;
 
 }

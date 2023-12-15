@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "vuelo")
-public class Vuelo {
+public class vuelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idVuelo")
@@ -24,7 +24,7 @@ public class Vuelo {
     // relaciones de entidades
 
     @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
-    private Set<Ticket> tickets;
+    private Set<asiento> asientos;
 
     @ManyToMany
     @JoinTable(
@@ -32,5 +32,5 @@ public class Vuelo {
             joinColumns = @JoinColumn(name = "idVuelo"),
             inverseJoinColumns = @JoinColumn(name = "idUsuario")
     )
-    private Set<Usuario> vuelosUsuarios ;
+    private Set<usuario> vuelosUsuarios ;
 }
