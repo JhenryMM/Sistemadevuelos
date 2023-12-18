@@ -1,10 +1,7 @@
 package com.fkyskyvuelos.sistemadevuelos.dto;
-
-import com.fkyskyvuelos.sistemadevuelos.entity.asiento;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +9,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class VueloDto {
-
 
     private String nombredeVuelo;
     private LocalDateTime fechaDeSalida;

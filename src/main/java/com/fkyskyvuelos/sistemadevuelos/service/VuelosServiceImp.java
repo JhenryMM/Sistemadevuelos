@@ -25,7 +25,6 @@ public class VuelosServiceImp implements IVuelosService {
         ModelMapper mapper = new ModelMapper();
         List<vuelo> vueloEnti = vuelosRepository.findAll();
         List<VueloDto> vuelosDto = new ArrayList<>();
-//        carritosEnt.stream().forEach(c-> carritosDto.add(mapper.map(c,CartDto.class)));
 
         vueloEnti.forEach(v -> {
                     Set<asiento> asientos = v.getAsientos();
@@ -40,7 +39,6 @@ public class VuelosServiceImp implements IVuelosService {
                     vuelosDto.add(vueloDtot);
                 }
         );
-
 
         return vuelosDto;
     }

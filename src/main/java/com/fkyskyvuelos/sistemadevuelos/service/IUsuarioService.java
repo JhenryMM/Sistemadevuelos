@@ -1,9 +1,13 @@
 package com.fkyskyvuelos.sistemadevuelos.service;
 
-import com.fkyskyvuelos.sistemadevuelos.dto.response.RespUserDto;
-import com.fkyskyvuelos.sistemadevuelos.dto.usuarioDto;
+import com.fkyskyvuelos.sistemadevuelos.dto.response.ResUsuarioDto;
+import com.fkyskyvuelos.sistemadevuelos.dto.response.SaveUserDto;
+import com.fkyskyvuelos.sistemadevuelos.dto.request.ReqUsuarioDto;
+
+import java.util.List;
 
 
 public interface IUsuarioService {
-    RespUserDto guardarCompra(usuarioDto usuario);
+    SaveUserDto guardarCompra(ReqUsuarioDto usuario);
+    List<ResUsuarioDto> obtenerTodos();
 }

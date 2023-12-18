@@ -21,13 +21,16 @@ public class usuario {
 
     private String nombre;
     private String apellido;
+    private String nombredelvuelo;
+    private String metodoDePago;
 
     // relaciones de entidades
 
-    @ManyToMany(mappedBy = "vuelosUsuarios")
-    private Set<vuelo> vuelos;
+    @ManyToMany(mappedBy = "reservadeusuarios")
+    private Set<reserva> reservas;
 
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+
+    @OneToOne
     @JoinColumn(name = "idasiento", referencedColumnName = "idAsiento")
     private asiento asiento;
 

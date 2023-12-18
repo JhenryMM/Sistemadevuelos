@@ -1,14 +1,11 @@
 package com.fkyskyvuelos.sistemadevuelos.controller;
 
-import com.fkyskyvuelos.sistemadevuelos.dto.usuarioDto;
+import com.fkyskyvuelos.sistemadevuelos.dto.request.ReqUsuarioDto;
 import com.fkyskyvuelos.sistemadevuelos.service.IUsuarioService;
 import com.fkyskyvuelos.sistemadevuelos.service.UsuarioServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuario")
@@ -21,7 +18,12 @@ public class UsuarioController {
     }
 
     @PostMapping("/comprar")
-    public ResponseEntity<?> guardarCompra(@RequestBody usuarioDto usuarioDto){
-        return new ResponseEntity<>(usuarioService.guardarCompra(usuarioDto), HttpStatus.OK);
+    public ResponseEntity<?> guardarCompra(@RequestBody ReqUsuarioDto ReqUsuarioDto){
+        return new ResponseEntity<>(usuarioService.guardarCompra(ReqUsuarioDto), HttpStatus.OK);
+    }
+
+    @GetMapping("/verUsuarios")
+    public ResponseEntity<?> verMiVuelo(){
+        return new ResponseEntity<>(usuarioService.obtenerTodos(),HttpStatus.OK);
     }
 }

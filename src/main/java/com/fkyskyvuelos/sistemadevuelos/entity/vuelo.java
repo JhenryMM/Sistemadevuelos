@@ -26,11 +26,4 @@ public class vuelo {
     @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
     private Set<asiento> asientos;
 
-    @ManyToMany
-    @JoinTable(
-            name="vuelo-usuario",
-            joinColumns = @JoinColumn(name = "idVuelo"),
-            inverseJoinColumns = @JoinColumn(name = "idUsuario")
-    )
-    private Set<usuario> vuelosUsuarios ;
 }

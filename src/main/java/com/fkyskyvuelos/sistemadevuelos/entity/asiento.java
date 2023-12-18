@@ -3,12 +3,16 @@ package com.fkyskyvuelos.sistemadevuelos.entity;
 
 import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "asiento")
 public class asiento {
 
@@ -16,8 +20,7 @@ public class asiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idAsiento")
     private Long id;
-
-    private String nombre;
+    private String nombredeAsiento;
     private boolean disponible;
     private boolean reservado;
 
@@ -29,5 +32,6 @@ public class asiento {
 
     @OneToOne(mappedBy = "asiento")
     private usuario usuario;
+
 
 }
